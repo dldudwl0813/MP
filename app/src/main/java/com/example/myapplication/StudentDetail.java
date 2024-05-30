@@ -122,42 +122,7 @@ public class StudentDetail extends AppCompatActivity {
         fetchDataFromServer();
 
 
-        // 데이터 검색 기능
-        // https://velog.io/@krrong/Android-RecyclerView-%EA%B2%80%EC%83%89-%EA%B8%B0%EB%8A%A5
-        search = findViewById(R.id.search);
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String searchText = search.getText().toString();
-                //Toast.makeText(getApplicationContext(),searchText,Toast.LENGTH_SHORT).show();
-                search_list.clear();
-
-                if(searchText.equals("")){
-                    mainAdapter.setItems(studentList);
-                }
-                else {
-                    // 검색 단어를 포함하는지 확인
-                    for (int a = 0; a < studentList.size(); a++) {
-                        if(studentList.get(a).getName().toString().toLowerCase().contains(searchText.toLowerCase()))
-                        {
-                            search_list.add(studentList.get(a));
-                        }
-                        mainAdapter.setItems(search_list);
-                    }
-                }
-
-            }
-        });
 
         btn_update = findViewById(R.id.btn_update);
         btn_update.setOnClickListener(new View.OnClickListener() {
