@@ -171,6 +171,14 @@ public class StudentDetail extends AppCompatActivity {
             }
         });
 
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
 
 
