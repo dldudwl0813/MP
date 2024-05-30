@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".AddNoticeActivity"
+            android:exported="false">
+        </activity>
+
+
+        <activity
+            android:name=".StudentDetail"
+            android:exported="false" />
+        <activity
+            android:name=".StudentStayOutOvernight"
+            android:exported="false" />
+        <activity
+            android:name=".ManagerRewardPunishmentPoint"
+            android:exported="false" />
+        <activity
+            android:name=".ManagerMainPage"
+            android:exported="false" />
+        <activity
+            android:name=".StudentInfo"
+            android:exported="true" />
+        <activity
+            android:name=".StudentInfoRequest"
+            android:exported="true" />
+        <activity
+            android:name=".StudentMainPage"
+            android:exported="true" />
+        <activity
+            android:name=".StudentLoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".StudentLoginRequest"
+            android:exported="true" />
+        <activity
+            android:name=".StudentRegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".StudentRegisterRequest"
+            android:exported="true" />
+        <activity
+            android:name=".StudentValidateRequest"
+            android:exported="true" />
+        <activity
+            android:name=".StudentUpdateRequest"
+            android:exported="true" />
+        <activity
+            android:name=".StudentDeleteAccount"
+            android:exported="true" />
+        <activity
+            android:name=".StudentDeleteRequest"
+            android:exported="true" />
+        <activity
+            android:name=".StudentPasswordCheck"
+            android:exported="true" />
+        <activity
+            android:name=".StudentAccess"
+            android:exported="true" />
+        <activity
+            android:name=".AccessUpdateRequest"
+            android:exported="true" />
+        <activity
+            android:name=".ManagerLoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ManagerLoginRequest"
+            android:exported="true" />
+        <activity
+            android:name=".ManagerRegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ManagerRegisterRequest"
+            android:exported="true" />
+        <activity
+            android:name=".ManagerValidateRequest"
+            android:exported="true" />
+        <activity
+            android:name=".MainLoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".AddSuggestionActivity"
+            android:exported="false">
+        </activity>
+
+    </application>
+
+</manifest>

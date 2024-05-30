@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<array name="dorm">
+    <item>dormitory 1</item>
+    <item>dormitory 2</item>
+    <item>dormitory 3</item>
+</array>
+</resources>
