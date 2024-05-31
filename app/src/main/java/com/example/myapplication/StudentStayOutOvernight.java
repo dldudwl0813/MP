@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +29,7 @@ import java.util.List;
 
 public class StudentStayOutOvernight extends AppCompatActivity {
 
-    private Button stayOutButton;
+    private Button stayOutButton, CancleButton;
     private RecyclerView stayOutRecyclerView;
     private StayOutAdapter stayOutAdapter;
     private List<StayOutInfo> stayOutList;
@@ -46,6 +49,7 @@ public class StudentStayOutOvernight extends AppCompatActivity {
         });
 
         stayOutButton = findViewById(R.id.stayOutButton);
+        CancleButton = findViewById(R.id.CancelButton);
         stayOutRecyclerView = findViewById(R.id.stayOutRecyclerView);
         stayOutRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         stayOutList = new ArrayList<>();
@@ -55,15 +59,28 @@ public class StudentStayOutOvernight extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("userPrefs", MODE_PRIVATE);
         String originID = sharedPreferences.getString("userID", null);
 
+
+        fetchUserInfo(originID);
+
+
         stayOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 StayOutInfo newStayOut = new StayOutInfo("Request information for an overnight stay");
-                stayOutList.add(newStayOut);
-                stayOutAdapter.notifyItemInserted(stayOutList.size() - 1);
-                showToast("Stay out requested");
+//                stayOutList.add(newStayOut);
+//                stayOutAdapter.notifyItemInserted(stayOutList.size() - 1);
 
                 updateStayOut(originID, "1");
+                showToast("Stay out requested");
+                stayOutButton.setText("외박 신청됨");
+            }
+        });
+        CancleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateStayOut(originID, "0");
+                showToast("Stay out request cancled");
+                stayOutButton.setText("외박 신청하기");
 
             }
         });
@@ -91,6 +108,43 @@ public class StudentStayOutOvernight extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         queue.add(stayOutOvernightUpdateRequest);
     }
+
+    private void fetchUserInfo(String userID) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+
+                    if (success) {
+                        //idText.setText(jsonResponse.getString("userID"));
+                        Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                        int stayout = jsonResponse.getInt("stay_out");
+                        if(stayout == 1)
+                        {
+                            stayOutButton.setText("외박 신청됨");
+
+                        }
+
+                        Toast.makeText(getApplicationContext(),Integer.toString(stayout),Toast.LENGTH_SHORT).show();
+                        //stayOut.setText(jsonResponse.getInt("stay_out"));
+
+                    } else {
+                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        StudentInfoRequest studentInfoRequest = new StudentInfoRequest(userID, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(studentInfoRequest);
+    }
+
+
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
